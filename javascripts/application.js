@@ -51,6 +51,7 @@ hw = (function() {
 
   updateStatusbar: function() {
     $('#statusbar').html("You will meet with "+hw_map.friends.length+" friends. <a href='#' class='update_meetingpoint'>Display our meeting point!</a>");
+    $('.update_meetingpoint').click(hw_map.updateMeetingPoint);
   },
 
   showError: function(msg) {
