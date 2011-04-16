@@ -19,14 +19,19 @@ hw_map = (function() {
             hw_map.infoWindow = new google.maps.InfoWindow;
         },
 
-        addFriend: function() {
+        addFriend: function(latitude, longitude) {
+            if (typeof latitude == 'undefined' || typeof longitude == 'undefined') {
+                var pos = self.map.getCenter()
+            } else {
+                var pos = new google.map.LatLng(latitude, longitude)
+            }
             var friend = {
                 name: 'What was his name again?',
                 marker: new google.maps.Marker({
                     map: self.map,
                     draggable: true,
                     clickable: true,
-                    position: self.map.getCenter(),
+                    position: pos,
                 }),
             }
             self.friends.push(friend)
