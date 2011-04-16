@@ -1,8 +1,33 @@
 hw = (function() {
 	var self = {
-        showError: function(msg) {
-            // TODO Jakis boxik
-            alert(msg);
+    places: null,
+	      
+	  init: function() {
+	  FB.init({
+      appId  : 165971536792687,
+      status : true,
+      cookie : true,
+      xfbml  : true
+    });
+
+    FB.getLoginStatus(function(response) {
+      if (response.session) {
+        hw.places = new fbPlaces({token: response.session.access_token});
+      } else {
+    		$('#overlay').show();
+      }
+    });
+  },
+  bindActions: function() {
+    $('#search_form').submit(function(e) {
+      e.preventDefault();
+      hw.places.search($('#search_query').val());
+    });
+    $('#refresh_location').click(hw.updateLocation);
+  },
+  showError: function(msg) {
+      // TODO Jakis boxik
+      alert(msg);
         },
 
         setOwnLocation: function(latitude, longitude, accuracy) {
@@ -31,6 +56,5 @@ hw = (function() {
 	return self;
 })();
 
-$(function() {
-    $('#refresh_location').click(hw.updateLocation);
-});
+hw.init();
+hw.bindActions();

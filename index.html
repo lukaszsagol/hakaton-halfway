@@ -34,6 +34,11 @@
 			</blockquote>
     </header>
     <div id="main" role="main">
+			<div>
+				<form id="search_form">
+				<input type="text" name="query" id="search_query" value="coffe"><input type="submit" value="show">
+				</form>
+			</div>
 			<button id="refresh_location">Find my location</button>
 			<button id="add_friend">Add friend</button>
 			<div id="map_canvas" style="width: 100%; height: 600px"></div>
@@ -54,6 +59,11 @@
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
     g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
     s.parentNode.insertBefore(g,s)}(document,"script"));
+		$(document).ready(function() {
+			// 
+			// hw.init();
+			// hw.bindActions();
+		});
 	</script>
 </body>
 </html>

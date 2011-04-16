@@ -5,6 +5,7 @@ hw_map = (function() {
         map: null,
         accuracyColor: '#ff9000',
         friends: [],
+        pois: [],
 
         createMap: function() {
             self.map = new google.maps.Map($('#map_canvas')[0], {
@@ -60,6 +61,15 @@ hw_map = (function() {
                 self.myAccuracy = null;
             }
             self.map.setCenter(pos);
+        },
+        
+        removePois: function() {
+          while(hw_map.pois.length > 0)
+          {
+        		poi = hw_map.pois.pop()
+            poi.setMap();
+            delete poi;
+          }
         },
     };
     return self;
