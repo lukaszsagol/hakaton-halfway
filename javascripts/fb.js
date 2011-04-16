@@ -20,7 +20,6 @@ var fbPlaces = function(args) {
 							.replace('%token', opts.token);
 			$.getJSON(url, function(points){
 			  hw_map.removePois();
-			  console.log(points.data);
 			  $.each(points.data, function(i, point) {
           hw_map.pois.push( new google.maps.Marker({
             position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
@@ -28,7 +27,7 @@ var fbPlaces = function(args) {
             title: point.name
           }));
           marker = hw_map.pois[hw_map.pois.length-1];
-          hw_map.bindInfoWindow(marker, '<h2>'+marker.title+'</h2>');
+          hw_map.bindInfoWindow(marker, marker.title);
         });
         
                    

@@ -34,8 +34,11 @@ hw_map = (function() {
                     clickable: true,
                     position: pos,
                 }),
+                longitude: pos.longitude,
+                latitude: pos.latitude
             }
             self.friends.push(friend)
+            hw.updateStatusbar();
         },
 
         removeFriend: function(friend) {
