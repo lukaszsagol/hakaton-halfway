@@ -32,7 +32,7 @@ hw = (function() {
     $('#friend_address').keypress(function(e) {
       if (e.which==13) {
         e.preventDefault();
-        if($(this).val() === ''){
+        if($(this).val() === '')
           if(!confirm('Just add new point?'))
             return;
 
