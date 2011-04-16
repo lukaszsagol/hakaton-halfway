@@ -18,6 +18,7 @@ hw_map = (function() {
             if (!self.myMarker) {
                 self.myMarker = new google.maps.Marker({
                     map: self.map,
+                    clickable: false,
                 });
             }
             self.myMarker.setPosition(pos);
@@ -27,14 +28,17 @@ hw_map = (function() {
                         map: self.map,
                         clickable: false,
                         fillColor: self.accuracyColor,
-                        fillOpacity: 0.1,
+                        fillOpacity: 0.2,
                         strokeColor: self.accuracyColor,
-                        strokeOpacity: 0.2,
+                        strokeOpacity: 0.4,
                         strokeWeight: 1,
                     });
                 }
                 self.myAccuracy.setCenter(pos);
                 self.myAccuracy.setRadius(accuracy);
+            } else if (self.myAccuracy) {
+                self.myAccuracy.setMap(null);
+                self.myAccuracy = null;
             }
             self.map.setCenter(pos);
         },
