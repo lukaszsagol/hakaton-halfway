@@ -42,6 +42,11 @@ hw_map = (function() {
                 latitude: latlng.lat(),
                 longitude: latlng.lng(),
             }
+            google.maps.event.addListener(friend.marker, 'dragend', function (event) {
+                friend.latitude = event.latLng.lat(),
+                friend.longitude = event.latLng.lng(),
+                self.myPos = event.latLng;
+            });
             self.friends.push(friend)
             hw.updateStatusbar();
         },
