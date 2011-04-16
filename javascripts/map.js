@@ -3,6 +3,7 @@ hw_map = (function() {
         myMarker: null,
         myAccuracy: null,
         map: null,
+        accuracyColor: '#ff9000',
 
         createMap: function() {
             self.map = new google.maps.Map($('#map_canvas')[0], {
@@ -24,12 +25,18 @@ hw_map = (function() {
                 if (!self.myAccuracy) {
                     self.myAccuracy = new google.maps.Circle({
                         map: self.map,
+                        clickable: false,
+                        fillColor: self.accuracyColor,
+                        fillOpacity: 0.1,
+                        strokeColor: self.accuracyColor,
+                        strokeOpacity: 0.2,
+                        strokeWeight: 1,
                     });
                 }
                 self.myAccuracy.setCenter(pos);
                 self.myAccuracy.setRadius(accuracy);
             }
-
+            self.map.setCenter(pos);
         },
     };
     return self;
