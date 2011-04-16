@@ -18,7 +18,7 @@ hw_map = (function() {
         addFriend: function() {
             var friend = {
                 name: 'What was his name again?',
-                marker: google.maps.Marker({
+                marker: new google.maps.Marker({
                     map: self.map,
                     draggable: true,
                     clickable: true,
