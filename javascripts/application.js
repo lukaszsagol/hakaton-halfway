@@ -1,5 +1,11 @@
 hf = (function(){
 	var self = {
+	  
+	      bindActions: function() {
+	        $('#search_form').submit(function() {
+	          fbPlaces.search(52,21,$('search_query').val());
+	        });
+	      },
         showError: function(msg) {
             // TODO Jakis boxik
             alert(msg);
@@ -30,6 +36,9 @@ hf = (function(){
                     self.showError('Could not find your location.');
                 }
             );
+	    },
+	    findPlaces: function() {
+	      places.search()
 	    },
 	};
 	return self;
