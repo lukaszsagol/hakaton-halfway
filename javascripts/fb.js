@@ -15,8 +15,16 @@ var fbPlaces = function(args) {
 							.replace('%lon', lon)
 							.replace('%distance', opts.distance)
 							.replace('%token', opts.token);
-			$.getJSON(url, function(data){
-				return data;
+			$.getJSON(url, function(points){
+			  console.log(points);
+				$.each(points.data, function(i, point) {
+    		                new google.maps.Marker({
+    		                    position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
+    		                    map: map,
+    		                    title: point.name
+    		                });
+
+    		        });
 			});
 		}
 	}
@@ -35,15 +43,7 @@ FB.Event.subscribe('auth.login', function(response) {
 
   if (response.session) {
     places = new fbPlaces({token: response.session.access_token});
-		points = places.search(52.2296756, 21.0122287, 'coffe');
-		console.log(points);
-		$.each(points, function(i, point) {
-		                new google.maps.Marker({
-		                    position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
-		                    map: map,
-		                    title: point.name
-		                });
-		          
-		        });
+		places.search(52.2296756, 21.0122287, 'coffe');
+		
   }
 });
