@@ -10,6 +10,7 @@ hw_map = (function() {
         pois: [],
         infoWindow: null,
         geocoder: null,
+        bounds: null,
 
         createMap: function() {
             self.myPos = new google.maps.LatLng(52.219505, 21.012436),
@@ -20,6 +21,7 @@ hw_map = (function() {
             });
             hw_map.infoWindow = new google.maps.InfoWindow;
             hw_map.geocoder = new google.maps.Geocoder();
+            bounds = new google.maps.LatLngBounds();
         },
 
         addFriend: function(latlng, draggable) {
@@ -43,7 +45,10 @@ hw_map = (function() {
                 longitude: latlng.lng(),
             }
             self.friends.push(friend)
+            hw_map.bounds.extend(latlng);
             hw.updateStatusbar();
+            hw_map.fitBounds(hw_map.bounds);
+            hw_map.setCenter(bounds.getCenter());
         },
 
         removeFriend: function(friend) {
