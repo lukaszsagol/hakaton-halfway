@@ -1,5 +1,6 @@
 hw_map = (function() {
     var self = {
+        myPos: null,
         myMarker: null,
         myAccuracy: null,
         map: null,
@@ -8,9 +9,10 @@ hw_map = (function() {
         pois: [],
 
         createMap: function() {
+            self.myPos = new google.maps.LatLng(52.219505, 21.012436),
             self.map = new google.maps.Map($('#map_canvas')[0], {
                 zoom: 17,
-                center: new google.maps.LatLng(52.219505, 21.012436),
+                center: self.myPos,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
         },
@@ -34,35 +36,19 @@ hw_map = (function() {
             }
         },
 
-        updateMyMarker: function(latitude, longitude, accuracy) {
-            var pos = new google.maps.LatLng(latitude, longitude);
+        setMyPosition: function(latitude, longitude) {
+            self.myPos = new google.maps.LatLng(latitude, longitude);
+        },
+
+        updateMyMarker: function{
             if (!self.myMarker) {
                 self.myMarker = new google.maps.Marker({
                     map: self.map,
                     clickable: false,
                 });
             }
-            self.myMarker.setPosition(pos);
-            if (typeof accuracy != 'undefined' && accuracy) {
-                if (!self.myAccuracy) {
-                    self.myAccuracy = new google.maps.Circle({
-                        map: self.map,
-                        clickable: false,
-                        fillColor: self.accuracyColor,
-                        fillOpacity: 0.2,
-                        strokeColor: self.accuracyColor,
-                        strokeOpacity: 0.4,
-                        strokeWeight: 1,
-                        zIndex: -9000,
-                    });
-                }
-                self.myAccuracy.setCenter(pos);
-                self.myAccuracy.setRadius(accuracy);
-            } else if (self.myAccuracy) {
-                self.myAccuracy.setMap(null);
-                self.myAccuracy = null;
-            }
-            self.map.setCenter(pos);
+            self.myMarker.setPosition(self.myPos);
+            self.map.setCenter(self.myPos);
         },
         
         removePois: function() {
