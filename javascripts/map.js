@@ -57,7 +57,7 @@ hw_map = (function() {
                 friend = self.friends[friend];
                 hw_map.bounds.extend(new google.maps.LatLng(friend.latitude, friend.longitude));
             }
-            hw_map.bounds.extend(new google.maps.LatLng(friend.latitude, friend.longitude));
+            bounds.extend(new google.maps.LatLng(friend.latitude, friend.longitude));
             hw_map.map.fitBounds(bounds);
             hw_map.map.setCenter(bounds.getCenter());
         },
