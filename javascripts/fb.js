@@ -28,19 +28,3 @@ var fbPlaces = function(args) {
 		}
 	}
 }
-
-
-FB.init({
-  appId  : 165971536792687,
-  status : true,
-  cookie : true,
-  xfbml  : true
-});
-
-FB.getLoginStatus(function(response) {
-  if (response.session) {
-    places = new fbPlaces({token: response.session.access_token});
-		places.search(52.2296756, 21.0122287, 'coffe');
-		
-  }
-});

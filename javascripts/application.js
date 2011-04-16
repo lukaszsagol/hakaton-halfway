@@ -1,8 +1,20 @@
 hw = (function() {
 	var self = {
-	  
 	      init: function() {
-	        
+	        FB.init({
+            appId  : 165971536792687,
+            status : true,
+            cookie : true,
+            xfbml  : true
+          });
+
+          FB.getLoginStatus(function(response) {
+            if (response.session) {
+              hw.places = new fbPlaces({token: response.session.access_token});
+            } else {
+          		$('#overlay').show();
+            }
+          });
 	      },
 	      bindActions: function() {
 	        console.log('asdf');
