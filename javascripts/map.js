@@ -9,6 +9,7 @@ hw_map = (function() {
         friends: [],
         pois: [],
         infoWindow: null,
+        geocoder: null,
 
         createMap: function() {
             self.myPos = new google.maps.LatLng(52.219505, 21.012436),
@@ -18,23 +19,25 @@ hw_map = (function() {
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
             hw_map.infoWindow = new google.maps.InfoWindow;
+            hw_map.geocoder = new google.maps.Geocoder();
         },
 
-        addFriend: function(latitude, longitude) {
-            if (typeof latitude == 'undefined' || typeof longitude == 'undefined') {
-                var pos = self.map.getCenter()
-            } else {
-                var pos = new google.map.LatLng(latitude, longitude)
-            }
+        addFriend: function(latlng, draggable) {
+            if(typeof draggable == 'undefined')
+              var draggable = true;
+              
+            if (!latlng)
+                var latlng = self.map.getCenter()
+            
             var friend = {
                 name: 'What was his name again?',
                 marker: new google.maps.Marker({
                     map: self.map,
+                    draggable: draggable,
                     icon: 'images/friends.png',
                     shadow: 'images/shadow.png',
-                    draggable: true,
                     clickable: true,
-                    position: pos,
+                    position: latlng,
                 }),
                 latitude: pos.lat(),
                 longitude: pos.lng(),
@@ -109,6 +112,21 @@ hw_map = (function() {
                 hw_map.infoWindow.setContent(html);
                 hw_map.infoWindow.open(hw_map.map, marker);
             });
+        },
+        
+        geocodeFriend: function(address) {
+          hw_map.geocoder.geocode({'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                 // map.setCenter(results[0].geometry.location);
+                  hw_map.addFriend(results[0].geometry.location);
+                  // var marker = new google.maps.Marker({
+                  //                      map: hw_map.map,
+                  //                      position: results[0].geometry.location
+                  //                  });
+                } else {
+                  alert("Geocode was not successful for the following reason: " + status);
+                }
+              });
         }
     };
     return self;

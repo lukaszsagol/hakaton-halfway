@@ -28,6 +28,14 @@ hw = (function() {
         hw.places.search($(this).val());
       }
     });
+    
+    $('#friend_address').keypress(function(e) {
+      if (e.which==13) {
+        e.preventDefault();
+        hw_map.geocodeFriend($(this).val());
+        //hw_map.addFriend(location.lat, location.lon);
+      }
+    });
 
     $('#categories li.link a').click(function() {
       $('#categories li a').removeClass('active');
