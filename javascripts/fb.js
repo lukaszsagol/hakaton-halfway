@@ -42,7 +42,7 @@ FB.Event.subscribe('auth.login', function(response) {
 		                    map: map,
 		                    title: flat.name
 		                });
-		            );
+		          
 		        });
   }
 });
