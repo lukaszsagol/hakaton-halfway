@@ -44,7 +44,7 @@ hw_map = (function() {
             self.myPos = new google.maps.LatLng(latitude, longitude);
         },
 
-        updateMyMarker: function{
+        updateMyMarker: function() {
             if (!self.myMarker) {
                 self.myMarker = new google.maps.Marker({
                     map: self.map,
