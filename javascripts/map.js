@@ -21,7 +21,7 @@ hw_map = (function() {
             });
             hw_map.infoWindow = new google.maps.InfoWindow;
             hw_map.geocoder = new google.maps.Geocoder();
-            bounds = new google.maps.LatLngBounds();
+            hw_map.bounds = new google.maps.LatLngBounds();
         },
 
         addFriend: function(latlng, draggable) {
