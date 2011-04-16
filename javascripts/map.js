@@ -39,6 +39,15 @@ hw_map = (function() {
             }
             self.map.setCenter(pos);
         },
+        
+        removePois: function() {
+          while(hw_map.pois.length > 0)
+          {
+        		poi = hw_map.pois.pop()
+            poi.setMap();
+            delete poi;
+          }
+        },
     };
     return self;
 })();
