@@ -20,7 +20,7 @@ hw_map = (function() {
                 });
             }
             self.myMarker.setPosition(pos);
-            if (typeof accuracy != 'undefined' and accuracy) {
+            if (typeof accuracy != 'undefined' && accuracy) {
                 if (!self.myAccuracy) {
                     self.myAccuracy = new google.maps.Circle({
                         map: self.map,
