@@ -12,6 +12,7 @@ hw = (function() {
 
     FB.getLoginStatus(function(response) {
       if (response.session) {
+    		$('#overlay').hide();
         hw.places = new fbPlaces({token: response.session.access_token});
       } else {
     		$('#overlay').show();
@@ -20,6 +21,7 @@ hw = (function() {
 
     FB.Event.subscribe('auth.sessionChange', function(response) {
       if (response.session) {
+    		$('#overlay').hide();
         hw.places = new fbPlaces({token: response.session.access_token});
       } else {
     		$('#overlay').show();
@@ -28,6 +30,7 @@ hw = (function() {
 
     FB.Event.subscribe('auth.login', function(response) {
       if (response.session) {
+    		$('#overlay').hide();
         hw.places = new fbPlaces({token: response.session.access_token});
       } else {
     		$('#overlay').show();
