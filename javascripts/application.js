@@ -1,4 +1,4 @@
-hf = (function(){
+hf = function(){
 	var self = {
         showError: function(msg) {
             // TODO Jakis boxik
@@ -33,4 +33,4 @@ hf = (function(){
 	    },
 	};
 	return self;
-})();
+}();
