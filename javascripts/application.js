@@ -5,9 +5,12 @@ hf = (function(){
             alert(msg);
         },
 
-        setLocation: function(position) {
-            console.log(position);
-            alert('Jest dobrze!');
+        setFriendLocation: function(latitude, longitude, accuracy) {
+            //
+        },
+
+        setOwnLocation: function(latitude, longitude, accuracy) {
+            //
         },
 
         updateLocation: function() {
@@ -15,7 +18,18 @@ hf = (function(){
                 self.showError('Geolocalisation not suppoorted!');
                 return;
             }
-            navigator.geolocation.getCurrentPosition(self.setLocation, self.showError);
+            navigator.geolocation.getCurrentPosition(
+                function(pos) {
+                    self.setOwnLocation(pos.coords.latitude, pos.coords.longitude, pos.coord.accuracy);
+                },
+                function(error) {
+                    var code = error.code
+                    if (code == 1) {
+                        return; // ignoruj
+                    }
+                    self.showError('Could not find your location.');
+                },
+            );
 	    },
 	};
 	return self;
