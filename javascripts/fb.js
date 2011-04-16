@@ -7,7 +7,7 @@ var fbPlaces = function(args) {
 	
 	var placesUrl = 'https://graph.facebook.com/search?q=%query&type=place&center=%lat,%lon&distance=%distance&access_token=%token&callback=';
 	
-	var search(lat, lon, query) {
+	var search = function(lat, lon, query) {
 		url = placesUrl.replace('%query', query)
 						.replace('%lat', lat)
 						.replace('%lon', lon)
