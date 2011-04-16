@@ -38,7 +38,6 @@ hw = (function() {
 
         hw_map.geocodeFriend($(this).val());
         $(this).val('');
-        //hw_map.addFriend(location.lat, location.lon);
       }
     });
 

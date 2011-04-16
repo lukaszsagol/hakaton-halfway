@@ -10,6 +10,7 @@ hw_map = (function() {
         pois: [],
         infoWindow: null,
         geocoder: null,
+        bounds: null,
 
         createMap: function() {
             self.myPos = new google.maps.LatLng(52.219505, 21.012436),
@@ -20,6 +21,7 @@ hw_map = (function() {
             });
             hw_map.infoWindow = new google.maps.InfoWindow;
             hw_map.geocoder = new google.maps.Geocoder();
+            hw_map.bounds = new google.maps.LatLngBounds();
         },
 
         addFriend: function(latlng, draggable) {
@@ -42,8 +44,15 @@ hw_map = (function() {
                 latitude: latlng.lat(),
                 longitude: latlng.lng(),
             }
+            google.maps.event.addListener(friend.marker, 'dragend', function (event) {
+                friend.latitude = event.latLng.lat();
+                friend.longitude = event.latLng.lng();
+            });
             self.friends.push(friend)
+            hw_map.bounds.extend(latlng);
             hw.updateStatusbar();
+            hw_map.map.fitBounds(hw_map.bounds);
+            hw_map.map.setCenter(bounds.getCenter());
         },
 
         removeFriend: function(friend) {
@@ -54,6 +63,7 @@ hw_map = (function() {
 
         setMyPosition: function(latitude, longitude) {
             self.myPos = new google.maps.LatLng(latitude, longitude);
+            hw_map.bounds.extend(self.myPos);
         },
 
         updateMyMarker: function() {
@@ -117,7 +127,7 @@ hw_map = (function() {
         geocodeFriend: function(address) {
           if(address === '')
             return;
-          hw_map.geocoder.geocode({'address': address}, function(results, status) {
+          hw_map.geocoder.geocode({'address': address, 'location': hw_map.myPos}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                  // map.setCenter(results[0].geometry.location);
                   hw_map.addFriend(results[0].geometry.location);
