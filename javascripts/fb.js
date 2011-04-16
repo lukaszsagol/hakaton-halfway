@@ -34,6 +34,6 @@ FB.Event.subscribe('auth.login', function(response) {
   console.debug(response);
   if (response.session) {
     places = new fbPlaces({token: response.session.access_token});
-		places.search(0, 0, 'coffe');
+		places.search(52.2296756, 21.0122287, 'coffe');
   }
 });
