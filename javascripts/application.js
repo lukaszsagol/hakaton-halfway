@@ -17,6 +17,7 @@ hw = (function() {
     		$('#overlay').show();
       }
     });
+    self.updateLocation();
   },
 
   bindActions: function() {
@@ -33,7 +34,6 @@ hw = (function() {
       hw.places.search(this.innerText);
       $(this).addClass('active');
     });
-    $('#refresh_location').click(hw.updateLocation);
   },
 
   showError: function(msg) {
@@ -42,7 +42,8 @@ hw = (function() {
         },
 
         setOwnLocation: function(latitude, longitude, accuracy) {
-            hw_map.updateMyMarker(latitude, longitude, accuracy);
+            hw_map.setMyPosition(latitude, longitude);
+            hw_map.updateMyMarker();
         },
 
         updateLocation: function() {
