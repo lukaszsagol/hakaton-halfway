@@ -9,6 +9,7 @@ var fbPlaces = function(args) {
   
 	return {
 		search: function(lat, lon, query) {
+		  console.log('asdf');
 			url = placesUrl.replace('%query', query)
 							.replace('%lat', lat)
 							.replace('%lon', lon)
