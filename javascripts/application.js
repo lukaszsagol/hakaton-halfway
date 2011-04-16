@@ -20,7 +20,7 @@ hw = (function() {
             }
             navigator.geolocation.getCurrentPosition(
                 function(pos) {
-                    self.setOwnLocation(pos.coords.latitude, pos.coords.longitude, pos.coord.accuracy);
+                    self.setOwnLocation(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
                 },
                 function(error) {
                     var code = error.code
