@@ -35,12 +35,12 @@ hw_map = (function() {
                     map: self.map,
                     draggable: draggable,
                     icon: 'images/friends.png',
-                    flat: true,
+                    shadow: 'images/shadow.png',
                     clickable: true,
                     position: latlng,
                 }),
-                latitude: pos.lat(),
-                longitude: pos.lng(),
+                latitude: latlng.getLat(),
+                longitude: latlng.getLng(),
             }
             self.friends.push(friend)
             hw.updateStatusbar();
@@ -61,7 +61,7 @@ hw_map = (function() {
                 self.myMarker = new google.maps.Marker({
                     map: self.map,
                     icon: 'images/me.png',
-                    flat: true,
+                    shadow: 'images/shadow.png',
                     draggable: true,
                     clickable: false,
                 });
@@ -69,7 +69,7 @@ hw_map = (function() {
             self.myMarker.setPosition(self.myPos);
             self.map.setCenter(self.myPos);
             google.maps.event.addListener(self.myMarker, 'dragend', function (evt) {
-                self.myPos = evt.latLng;
+                self.myPos = event.latLng;
             });
         },
 
@@ -78,8 +78,8 @@ hw_map = (function() {
             var latitude = self.myPos.lat();
             var longitude = self.myPos.lng();
             var count = 1;
-            for (var i = 0; i < self.friends.length; i++) {
-                var friend = self.friends[i];
+            for (var friend in self.friends) {
+                friend = self.friends[friend];
                 latitude += friend.latitude;
                 longitude += friend.longitude;
                 count++;
@@ -91,7 +91,7 @@ hw_map = (function() {
                 self.meetingMarker = new google.maps.Marker({
                     map: self.map,
                     icon: 'images/regroup.png',
-                    flat: true,
+                    shadow: 'images/shadow.png',
                     draggable: false,
                     clickable: false,
                 });
