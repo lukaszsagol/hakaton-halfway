@@ -8,18 +8,32 @@
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS: implied media="all" -->
+	<link href="http://fonts.googleapis.com/css?family=Expletus+Sans:400,500,600,700" rel="stylesheet" type="text/css" >
+	<link href="http://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" >
+
   <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 
 <body>
 	<div id="fb-root"></div>
+	<div id="overlay">
+		<div class="center">
+			<h2>Please login via Facebook</h2>
+			<fb:login-button show-faces='false' width='200'></fb:login-button>
+		</div>
+	</div>
   <div id="container">
     <header>
 			<h1>halfway</h1>
+			<blockquote id="quote">
+				Can you meet me halfway, right at the boarderline
+				<br/>
+				That's where I'm gonna wait, for you
+				<br/>
+				<div class="author">The Black Eyed Peas - Meet me halfway</div>
+			</blockquote>
     </header>
     <div id="main" role="main">
-			<fb:login-button show-faces='false' width='200'></fb:login-button>
 			<div id="map_canvas" style="width: 100%; height: 600px"></div>
     </div>
     <footer>
