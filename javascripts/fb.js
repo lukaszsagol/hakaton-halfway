@@ -28,6 +28,7 @@ var fbPlaces = function(args) {
     		                }));
 
     		        });
+    		        console.log(pois);
 			});
 		}
 	}
