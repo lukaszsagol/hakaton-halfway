@@ -50,7 +50,13 @@ hw = (function() {
 
   updateStatusbar: function() {
     $('#statusbar').html("You will meet with "+hw_map.friends.length+" friends. <a href='#' class='update_meetingpoint'>Display our meeting point!</a>");
-    $('.update_meetingpoint').click(hw_map.updateMeetingPoint);
+    $('.update_meetingpoint').click(function() {
+      hw_map.updateMeetingPoint();
+      $('#statusbar').hide();
+      $('#friend_searcher').hide();
+      $('#categories').show();
+      $('#start_over').show();
+    });
   },
 
   showError: function(msg) {

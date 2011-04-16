@@ -28,7 +28,7 @@ hw_map = (function() {
             if(typeof draggable == 'undefined')
               var draggable = true;
               
-            if (!latlng)
+            if (!latlng) 
                 var latlng = self.map.getCenter()
             
             var friend = {
@@ -146,5 +146,13 @@ hw_map = (function() {
 
 $(function() {
     hw_map.createMap();
-    $('#add_friend').click(hw_map.addFriend);
+    $('#add_friend').click(function() { 
+      var adr = $('#friend_address').val(); 
+      if (adr === '') {
+        hw_map.addFriend(); 
+      } else {
+        hw_map.geocodeFriend(adr);
+      }
+      $('#friend_address').val('');
+    });
 });
