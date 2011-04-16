@@ -64,6 +64,7 @@ hw_map = (function() {
         },
 
         updateMeetingPoint: function() {
+            // We're on a flat disc!!! Who said we live on a sphere!?!?!?
             var latitude = self.myPos.latitude;
             var longitude = self.myPos.longitude;
             var count = 1;
