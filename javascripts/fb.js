@@ -24,7 +24,8 @@ var fbPlaces = function(args) {
           hw_map.pois.push( new google.maps.Marker({
             position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
             map: hw_map.map,
-            title: point.name
+            title: point.name,
+            icon: 'images/'+query+'.png
           }));
           marker = hw_map.pois[hw_map.pois.length-1];
           hw_map.bindInfoWindow(marker, marker.title);
