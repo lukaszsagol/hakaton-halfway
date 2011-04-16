@@ -1,4 +1,4 @@
-self = (function() {
+hw_map = (function() {
     var self = {
         myPos: null,
         myMarker: null,
