@@ -60,5 +60,7 @@ hw = (function() {
 	return self;
 })();
 
-hw.init();
-hw.bindActions();
+jQuery(function($) {
+	hw.init();
+	hw.bindActions();
+});
