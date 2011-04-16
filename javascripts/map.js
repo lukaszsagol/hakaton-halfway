@@ -45,8 +45,8 @@ hw_map = (function() {
                 longitude: latlng.lng(),
             }
             google.maps.event.addListener(friend.marker, 'dragend', function (event) {
-                friend.latitude = event.latLng.lat(),
-                friend.longitude = event.latLng.lng(),
+                friend.latitude = event.latLng.lat();
+                friend.longitude = event.latLng.lng();
             });
             self.friends.push(friend)
             hw_map.bounds.extend(latlng);
