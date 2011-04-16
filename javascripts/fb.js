@@ -41,9 +41,7 @@ FB.init({
   xfbml  : true
 });
 
-FB.Event.subscribe('auth.login', function(response) {
-  console.debug(response);
-
+FB.getLoginStatus(function(response) {
   if (response.session) {
     places = new fbPlaces({token: response.session.access_token});
 		places.search(52.2296756, 21.0122287, 'coffe');
