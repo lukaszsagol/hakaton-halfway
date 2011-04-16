@@ -4,6 +4,7 @@ hw_map = (function() {
         myAccuracy: null,
         map: null,
         accuracyColor: '#ff9000',
+        friends: [],
 
         createMap: function() {
             self.map = new google.maps.Map($('#map_canvas')[0], {
@@ -13,8 +14,26 @@ hw_map = (function() {
             });
         },
 
+        addFriend: function(friend) {
+            if (typeof friend.marker == 'undefined') {
+                var marker = google.maps.Marker({
+                    map: self.map,
+                    draggable: true,
+                    clickable: true,
+                    position: self.map.getCenter(),
+                })
+            }
+            self.friends.push(friend)
+        },
+
+        removeFriend: function(friend) {
+            self.friends.push(friend)
+            if (typeof friend.marker == 'undefined') {
+            }
+        },
+
         updateMyMarker: function(latitude, longitude, accuracy) {
-            var pos = new google.maps.LatLng(latitude, longitude);            
+            var pos = new google.maps.LatLng(latitude, longitude);
             if (!self.myMarker) {
                 self.myMarker = new google.maps.Marker({
                     map: self.map,
@@ -48,4 +67,6 @@ hw_map = (function() {
 
 $(function() {
     hw_map.createMap();
+    $('#add_friend').click(hw_map.addFriend);
+    
 });

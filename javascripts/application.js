@@ -5,10 +5,6 @@ hw = (function() {
             alert(msg);
         },
 
-        setFriendLocation: function(latitude, longitude, accuracy) {
-            //
-        },
-
         setOwnLocation: function(latitude, longitude, accuracy) {
             hw_map.updateMyMarker(latitude, longitude, accuracy);
         },
