@@ -151,7 +151,7 @@ hw_map = (function() {
 })();
 
 $(function() {
-    self.createMap();
+    hw_map.createMap();
     $('#add_friend').click(function() { 
       var adr = $('#friend_address').val(); 
       if (adr === '') {
