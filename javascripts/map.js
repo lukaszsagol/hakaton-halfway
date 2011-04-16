@@ -60,7 +60,7 @@ hw_map = (function() {
             }
             bounds.extend(self.myPos);
             self.map.fitBounds(bounds);
-            if (self.map.getZoom < self.minZoom) {
+            if (self.map.getZoom() < self.minZoom) {
                 self.map.setZoom(self.minZoom);
             }
             self.map.setCenter(bounds.getCenter());
