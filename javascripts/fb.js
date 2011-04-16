@@ -12,7 +12,7 @@ var fbPlaces = function(args) {
   
 	return {
 		search: function(query) {
-		  position = hw_map.myMarker.getPosition();
+		  position = hw_map.meetingPos;
 			url = placesUrl.replace('%query', query)
 							.replace('%lat', position.lat())
 							.replace('%lon', position.lng())
