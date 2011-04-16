@@ -135,5 +135,5 @@ hw_map = (function() {
 $(function() {
     hw_map.createMap();
     $('#add_friend').click(hw_map.addFriend);
-    $('#update_meetingpoint').click(hw_map.updateMeetingPoint);
+    $('.update_meetingpoint').click(hw_map.updateMeetingPoint);
 });
