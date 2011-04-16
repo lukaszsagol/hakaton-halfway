@@ -16,15 +16,17 @@ var fbPlaces = function(args) {
 							.replace('%distance', opts.distance)
 							.replace('%token', opts.token);
 			$.getJSON(url, function(points){
+			  console.log(points);
 			  var pois = [];
-				$.each(points.data, function(i, point) {
-    		                pois.push( new google.maps.Marker({
-    		                    position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
-    		                    map: hw_map.map,
-    		                    title: point.name
-    		                }));
-
-    		        });
+			  pois.empty;
+			  console.log(hw_map.map);
+			  $.each(points.data, function(i, point) {
+          pois.push( new google.maps.Marker({
+            position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
+            map: hw_map.map,
+            title: point.name
+          }));
+        });        
 			});
 		}
 	}
