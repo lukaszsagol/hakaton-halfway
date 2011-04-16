@@ -4,6 +4,7 @@ hw_map = (function() {
         myAccuracy: null,
         map: null,
         accuracyColor: '#ff9000',
+        pois: [],
 
         createMap: function() {
             self.map = new google.maps.Map($('#map_canvas')[0], {

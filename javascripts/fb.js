@@ -15,10 +15,9 @@ var fbPlaces = function(args) {
 							.replace('%distance', opts.distance)
 							.replace('%token', opts.token);
 			$.getJSON(url, function(points){
-			  var pois = [];
-			  pois.empty;
+			  hw_map.pois.empty;
 			  $.each(points.data, function(i, point) {
-          pois.push( new google.maps.Marker({
+          hw_map.pois.push( new google.maps.Marker({
             position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
             map: hw_map.map,
             title: point.name
