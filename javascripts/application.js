@@ -25,6 +25,14 @@ hw = (function() {
     		$('#overlay').show();
       }
     });
+
+    FB.Event.subscribe('auth.login', function(response) {
+      if (response.session) {
+        hw.places = new fbPlaces({token: response.session.access_token});
+      } else {
+    		$('#overlay').show();
+      }
+    });
                    
 
     self.updateLocation();
