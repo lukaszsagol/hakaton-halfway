@@ -35,7 +35,7 @@ hw_map = (function() {
                     map: self.map,
                     draggable: draggable,
                     icon: 'images/friends.png',
-                    shadow: 'images/shadow.png',
+                    flat: true,
                     clickable: true,
                     position: latlng,
                 }),
@@ -61,7 +61,7 @@ hw_map = (function() {
                 self.myMarker = new google.maps.Marker({
                     map: self.map,
                     icon: 'images/me.png',
-                    shadow: 'images/shadow.png',
+                    flat: true,
                     draggable: true,
                     clickable: false,
                 });
@@ -78,8 +78,8 @@ hw_map = (function() {
             var latitude = self.myPos.lat();
             var longitude = self.myPos.lng();
             var count = 1;
-            for (var friend in self.friends) {
-                friend = self.friends[friend];
+            for (var i = 0; i < self.friends.length; i++) {
+                var friend = self.friends[i];
                 latitude += friend.latitude;
                 longitude += friend.longitude;
                 count++;
@@ -91,7 +91,7 @@ hw_map = (function() {
                 self.meetingMarker = new google.maps.Marker({
                     map: self.map,
                     icon: 'images/regroup.png',
-                    shadow: 'images/shadow.png',
+                    flat: true,
                     draggable: false,
                     clickable: false,
                 });
