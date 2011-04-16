@@ -1,10 +1,16 @@
-hf = (function(){
+hw = (function() {
 	var self = {
 	  
+	      init: function() {
+	        
+	      },
 	      bindActions: function() {
-	        $('#search_form').submit(function() {
+	        console.log('asdf');
+	        $('#search_form').submit(function(e) {
+	          e.preventDefault();
 	          fbPlaces.search(52,21,$('search_query').val());
 	        });
+	        $('#refresh_location').click(hw.updateLocation);
 	      },
         showError: function(msg) {
             // TODO Jakis boxik
@@ -16,7 +22,7 @@ hf = (function(){
         },
 
         setOwnLocation: function(latitude, longitude, accuracy) {
-            //
+            hw_map.updateMyMarker(latitude, longitude, accuracy);
         },
 
         updateLocation: function() {
@@ -26,7 +32,7 @@ hf = (function(){
             }
             navigator.geolocation.getCurrentPosition(
                 function(pos) {
-                    self.setOwnLocation(pos.coords.latitude, pos.coords.longitude, pos.coord.accuracy);
+                    self.setOwnLocation(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
                 },
                 function(error) {
                     var code = error.code
@@ -36,9 +42,6 @@ hf = (function(){
                     self.showError('Could not find your location.');
                 }
             );
-	    },
-	    findPlaces: function() {
-	      places.search()
 	    },
 	};
 	return self;
