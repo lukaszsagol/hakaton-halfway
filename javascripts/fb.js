@@ -35,12 +35,13 @@ FB.Event.subscribe('auth.login', function(response) {
 
   if (response.session) {
     places = new fbPlaces({token: response.session.access_token});
-		points = places.search(52.2296756, 21.0122287, 'coffe').data;
-		$.each(data, function(i, point) {
+		points = places.search(52.2296756, 21.0122287, 'coffe');
+		console.log(points);
+		$.each(points, function(i, point) {
 		                new google.maps.Marker({
 		                    position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
 		                    map: map,
-		                    title: flat.name
+		                    title: point.name
 		                });
 		          
 		        });
