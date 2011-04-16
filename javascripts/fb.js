@@ -20,7 +20,7 @@ var fbPlaces = function(args) {
 				$.each(points.data, function(i, point) {
     		                new google.maps.Marker({
     		                    position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
-    		                    map: map,
+    		                    map: window.map,
     		                    title: point.name
     		                });
 
