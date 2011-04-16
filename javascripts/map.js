@@ -30,12 +30,14 @@ hw_map = (function() {
                 name: 'What was his name again?',
                 marker: new google.maps.Marker({
                     map: self.map,
+                    image: 'images/friends.png',
+                    shadow: 'images/shadow.png',
                     draggable: true,
                     clickable: true,
                     position: pos,
                 }),
-                longitude: pos.longitude,
-                latitude: pos.latitude
+                latitude: pos.lat(),
+                longitude: pos.lng(),
             }
             self.friends.push(friend)
             hw.updateStatusbar();
@@ -55,6 +57,8 @@ hw_map = (function() {
             if (!self.myMarker) {
                 self.myMarker = new google.maps.Marker({
                     map: self.map,
+                    image: 'images/me.png',
+                    shadow: 'images/shadow.png',
                     draggable: true,
                     clickable: false,
                 });
@@ -68,8 +72,8 @@ hw_map = (function() {
 
         updateMeetingPoint: function() {
             // We're on a flat disc!!! Who said we live on a sphere!?!?!?
-            var latitude = self.myPos.latitude;
-            var longitude = self.myPos.longitude;
+            var latitude = self.myPos.lat();
+            var longitude = self.myPos.lng();
             var count = 1;
             for (var friend in self.friends) {
                 friend = self.friends[friend];
@@ -83,6 +87,8 @@ hw_map = (function() {
             if (!self.meetingMarker) {
                 self.meetingMarker = new google.maps.Marker({
                     map: self.map,
+                    image: 'images/regroup.png',
+                    shadow: 'images/shadow.png',
                     draggable: false,
                     clickable: false,
                 });
