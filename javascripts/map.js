@@ -52,8 +52,8 @@ hw_map = (function() {
             self.friends.push(friend)
             hw_map.bounds.extend(latlng);
             hw.updateStatusbar();
-            hw_map.fitBounds(hw_map.bounds);
-            hw_map.setCenter(bounds.getCenter());
+            hw_map.map.fitBounds(hw_map.bounds);
+            hw_map.map.setCenter(bounds.getCenter());
         },
 
         removeFriend: function(friend) {
