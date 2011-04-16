@@ -10,11 +10,12 @@ hw_map = (function() {
         pois: [],
         infoWindow: null,
         geocoder: null,
+        minZoom: 17,
 
         createMap: function() {
             self.myPos = new google.maps.LatLng(52.219505, 21.012436),
             self.map = new google.maps.Map($('#map_canvas')[0], {
-                zoom: 17,
+                zoom: self.minZoom,
                 center: self.myPos,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
@@ -59,6 +60,9 @@ hw_map = (function() {
             }
             bounds.extend(self.myPos);
             self.map.fitBounds(bounds);
+            if (self.map.getZoom < self.minZoom) {
+                self.map.setZoom(self.minZoom);
+            }
             self.map.setCenter(bounds.getCenter());
         },
 
