@@ -6,6 +6,7 @@ hw_map = (function() {
         accuracyColor: '#ff9000',
         friends: [],
         pois: [],
+        infoWindow: null,
 
         createMap: function() {
             self.map = new google.maps.Map($('#map_canvas')[0], {
@@ -13,6 +14,7 @@ hw_map = (function() {
                 center: new google.maps.LatLng(52.219505, 21.012436),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
+            hw_map.infoWindow = new google.maps.InfoWindow;
         },
 
         addFriend: function() {
@@ -73,6 +75,13 @@ hw_map = (function() {
             delete poi;
           }
         },
+        
+        bindInfoWindow: function (marker, html) {
+            google.maps.event.addListener(marker, 'click', function() {
+                hw_map.infoWindow.setContent(html);
+                hw_map.infoWindow.open(hw_map.map, marker);
+            });
+        }
     };
     return self;
 })();
