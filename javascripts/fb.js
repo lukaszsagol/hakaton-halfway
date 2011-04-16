@@ -5,7 +5,7 @@ var fbPlaces = function(args) {
 	}
 	var opts = $.extend({}, defaults, args);
 	
-	var placesUrl = 'https://graph.facebook.com/search?q=%query&type=place&center=%lat,%lon&distance=%distance&access_token=%token&callback=';
+	var placesUrl = 'https://graph.facebook.com/search?q=%query&type=place&center=%lat,%lon&distance=%distance&access_token=%token&callback=?';
 	
 
 	return {
