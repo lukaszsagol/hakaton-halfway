@@ -128,7 +128,7 @@ hw_map = (function() {
         geocodeFriend: function(address) {
           if(address === '')
             return;
-          hw_map.geocoder.geocode({'address': address, location: self.myPos}, function(results, status) {
+          hw_map.geocoder.geocode({'address': address, 'location': hw_map.myPos}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                  // map.setCenter(results[0].geometry.location);
                   hw_map.addFriend(results[0].geometry.location);
