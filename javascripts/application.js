@@ -17,13 +17,13 @@ hw = (function() {
     		$('#overlay').show();
       }
     });
+    self.updateLocation();
   },
   bindActions: function() {
     $('#search_form').submit(function(e) {
       e.preventDefault();
       hw.places.search($('#search_query').val());
     });
-    $('#refresh_location').click(hw.updateLocation);
   },
   showError: function(msg) {
       // TODO Jakis boxik
@@ -31,7 +31,8 @@ hw = (function() {
         },
 
         setOwnLocation: function(latitude, longitude, accuracy) {
-            hw_map.updateMyMarker(latitude, longitude, accuracy);
+            hw_map.setMyPosition(latitude, longitude);
+            hw_map.updateMyMarker();
         },
 
         updateLocation: function() {
