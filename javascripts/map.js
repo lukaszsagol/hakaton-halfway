@@ -1,4 +1,4 @@
-hw_map = (function() {
+self = (function() {
     var self = {
         myPos: null,
         myMarker: null,
@@ -18,8 +18,8 @@ hw_map = (function() {
                 center: self.myPos,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
-            hw_map.infoWindow = new google.maps.InfoWindow;
-            hw_map.geocoder = new google.maps.Geocoder();
+            self.infoWindow = new google.maps.InfoWindow;
+            self.geocoder = new google.maps.Geocoder();
         },
 
         addFriend: function(latlng, draggable) {
@@ -57,9 +57,9 @@ hw_map = (function() {
                 friend = self.friends[friend];
                 bounds.extend(new google.maps.LatLng(friend.latitude, friend.longitude));
             }
-            bounds.extend(new google.maps.LatLng(friend.latitude, friend.longitude));
-            hw_map.map.fitBounds(bounds);
-            hw_map.map.setCenter(bounds.getCenter());
+            bounds.extend(self.myPos);
+            self.map.fitBounds(bounds);
+            self.map.setCenter(bounds.getCenter());
         },
 
         removeFriend: function(friend) {
@@ -116,8 +116,8 @@ hw_map = (function() {
         },
         
         removePois: function() {
-            while(hw_map.pois.length > 0) {
-                poi = hw_map.pois.pop()
+            while(self.pois.length > 0) {
+                poi = self.pois.pop()
                 poi.setMap();
                 delete poi;
             }
@@ -125,20 +125,20 @@ hw_map = (function() {
         
         bindInfoWindow: function (marker, html) {
             google.maps.event.addListener(marker, 'click', function() {
-                hw_map.infoWindow.setContent(html);
-                hw_map.infoWindow.open(hw_map.map, marker);
+                self.infoWindow.setContent(html);
+                self.infoWindow.open(hw_map.map, marker);
             });
         },
         
         geocodeFriend: function(address) {
           if(address === '')
             return;
-          hw_map.geocoder.geocode({'address': address}, function(results, status) {
+          self.geocoder.geocode({'address': address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                  // map.setCenter(results[0].geometry.location);
-                  hw_map.addFriend(results[0].geometry.location);
+                  self.addFriend(results[0].geometry.location);
                   // var marker = new google.maps.Marker({
-                  //                      map: hw_map.map,
+                  //                      map: self.map,
                   //                      position: results[0].geometry.location
                   //                  });
                 } else {
@@ -151,7 +151,7 @@ hw_map = (function() {
 })();
 
 $(function() {
-    hw_map.createMap();
+    self.createMap();
     $('#add_friend').click(function() { 
       var adr = $('#friend_address').val(); 
       if (adr === '') {
