@@ -2,7 +2,8 @@ hw_map = (function() {
     var self = {
         myPos: null,
         myMarker: null,
-        myAccuracy: null,
+        meetingPos: null,
+        meetingMarker: null,
         map: null,
         accuracyColor: '#ff9000',
         friends: [],
@@ -54,11 +55,39 @@ hw_map = (function() {
             if (!self.myMarker) {
                 self.myMarker = new google.maps.Marker({
                     map: self.map,
+                    draggable: true,
                     clickable: false,
                 });
             }
             self.myMarker.setPosition(self.myPos);
             self.map.setCenter(self.myPos);
+            google.maps.event.addListener(self.myMarker, 'dragend', function (evt) {
+                self.myPos = event.latLng;
+            });
+        },
+
+        updateMeetingPoint: function() {
+            // We're on a flat disc!!! Who said we live on a sphere!?!?!?
+            var latitude = self.myPos.latitude;
+            var longitude = self.myPos.longitude;
+            var count = 1;
+            for (var friend in self.friends) {
+                friend = self.friends[friend];
+                latitude += friend.latitude;
+                longitude += friend.longitude;
+                count++;
+            }
+            latitude /= count;
+            longitude /= count;
+            self.meetingPos = new google.maps.LatLng(latitude, longitude);
+            if (!self.meetingMarker) {
+                self.meetingMarker = new google.maps.Marker({
+                    map: self.map,
+                    draggable: false,
+                    clickable: false,
+                });
+            }
+            self.meetingMarker.setPosition(self.meetingPos);
         },
         
         removePois: function() {
@@ -82,4 +111,5 @@ hw_map = (function() {
 $(function() {
     hw_map.createMap();
     $('#add_friend').click(hw_map.addFriend);
+    $('#update_meetingpoint').click(hw_map.updateMeetingPoint);
 });
