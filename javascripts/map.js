@@ -1,8 +1,8 @@
 hw_map = (function() {
     var self = {
-        myMarker = null,
-        myAccuracy = null,
-        map = null,
+        myMarker: null,
+        myAccuracy: null,
+        map: null,
 
         createMap: function() {
             self.map = new google.maps.Map($('#map_canvas')[0], {
