@@ -15,14 +15,15 @@ hw_map = (function() {
             });
         },
 
-        addFriend: function(friend) {
-            if (typeof friend.marker == 'undefined') {
-                var marker = google.maps.Marker({
+        addFriend: function() {
+            var friend = {
+                name: 'What was his name again?',
+                marker: google.maps.Marker({
                     map: self.map,
                     draggable: true,
                     clickable: true,
                     position: self.map.getCenter(),
-                })
+                }),
             }
             self.friends.push(friend)
         },
