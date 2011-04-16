@@ -72,7 +72,7 @@ hw_map = (function() {
                 hw_map.infoWindow.open(hw_map.map, marker);
             });
         }
-    },
+    };
     return self;
 })();
 
