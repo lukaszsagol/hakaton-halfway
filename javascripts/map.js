@@ -117,6 +117,7 @@ hw_map = (function() {
                 });
             }
             self.meetingMarker.setPosition(self.meetingPos);
+            self.map.setCenter(self.meetingPos);
         },
         
         removePois: function() {
