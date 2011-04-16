@@ -114,6 +114,7 @@ hw_map = (function() {
                     flat: true,
                     draggable: false,
                     clickable: false,
+                    zIndex: 1000,
                 });
             }
             self.meetingMarker.setPosition(self.meetingPos);
