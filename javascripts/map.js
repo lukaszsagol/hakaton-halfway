@@ -53,6 +53,7 @@ hw_map = (function() {
                         strokeColor: self.accuracyColor,
                         strokeOpacity: 0.4,
                         strokeWeight: 1,
+                        zIndex: -9000,
                     });
                 }
                 self.myAccuracy.setCenter(pos);
