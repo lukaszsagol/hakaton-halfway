@@ -52,7 +52,7 @@ hw_map = (function() {
             hw_map.bounds.extend(latlng);
             hw.updateStatusbar();
             hw_map.map.fitBounds(hw_map.bounds);
-            hw_map.map.setCenter(bounds.getCenter());
+            hw_map.map.setCenter(hw_map.bounds.getCenter());
         },
 
         removeFriend: function(friend) {
