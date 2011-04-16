@@ -8,10 +8,11 @@ var fbPlaces = function(args) {
 	var placesUrl = 'https://graph.facebook.com/search?q=%query&type=place&center=%lat,%lon&distance=%distance&access_token=%token&callback=?';
   
 	return {
-		search: function(lat, lon, query) {
+		search: function(query) {
+		  position = hw_map.myMarker.getPosition();
 			url = placesUrl.replace('%query', query)
-							.replace('%lat', lat)
-							.replace('%lon', lon)
+							.replace('%lat', position.lat())
+							.replace('%lon', position.lng())
 							.replace('%distance', opts.distance)
 							.replace('%token', opts.token);
 			$.getJSON(url, function(points){

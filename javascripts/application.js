@@ -21,17 +21,13 @@ hw = (function() {
   bindActions: function() {
     $('#search_form').submit(function(e) {
       e.preventDefault();
-      hw.places.search(52.219505,21.01243599999998,$('#search_query').val());
+      hw.places.search($('#search_query').val());
     });
     $('#refresh_location').click(hw.updateLocation);
   },
   showError: function(msg) {
       // TODO Jakis boxik
       alert(msg);
-        },
-
-        setFriendLocation: function(latitude, longitude, accuracy) {
-            //
         },
 
         setOwnLocation: function(latitude, longitude, accuracy) {
