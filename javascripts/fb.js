@@ -28,7 +28,7 @@ var fbPlaces = function(args) {
             title: point.name
           }));
           google.maps.event.addListener(hw_map.pois[hw_map.pois.length-1], 'click', function() {
-            fbPlaces.infowindow.setContent('<h2>'+marker.title+'</h2>');
+            fbPlaces.infowindow.setContent('<h2>'+hw_map.pois[hw_map.pois.length-1].title+'</h2>');
             fbPlaces.infowindow.open(hw_map.map,hw_map.pois[hw_map.pois.length-1]);
           });
         });
