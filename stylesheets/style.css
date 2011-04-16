@@ -56,7 +56,8 @@ footer {
 }
 
 #main {
-  width: 960px;
+  width: 940px;
+  padding: 0 10px 10px 10px;
   margin: 0 auto;
   background: #fff;
 }
@@ -83,4 +84,8 @@ footer {
 #categories a.active {
   background: #000;
   color: #eee;
+}
+
+#friend_searcher {
+  display: inline-block;
 }
