@@ -30,7 +30,7 @@ hw_map = (function() {
                 name: 'What was his name again?',
                 marker: new google.maps.Marker({
                     map: self.map,
-                    image: 'images/friends.png',
+                    icon: 'images/friends.png',
                     shadow: 'images/shadow.png',
                     draggable: true,
                     clickable: true,
@@ -57,7 +57,7 @@ hw_map = (function() {
             if (!self.myMarker) {
                 self.myMarker = new google.maps.Marker({
                     map: self.map,
-                    image: 'images/me.png',
+                    icon: 'images/me.png',
                     shadow: 'images/shadow.png',
                     draggable: true,
                     clickable: false,
@@ -87,7 +87,7 @@ hw_map = (function() {
             if (!self.meetingMarker) {
                 self.meetingMarker = new google.maps.Marker({
                     map: self.map,
-                    image: 'images/regroup.png',
+                    icon: 'images/regroup.png',
                     shadow: 'images/shadow.png',
                     draggable: false,
                     clickable: false,
