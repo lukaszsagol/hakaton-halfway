@@ -34,7 +34,7 @@ hw = (function() {
         e.preventDefault();
         if($(this).val() == ''){
           if(confirm('Just add new point?'))
-            hw_map.geocodeFriend(hw_map.map.center);
+            hw_map.geocodeFriend(hw_map.map.getCenter());
           return;
         }
 
