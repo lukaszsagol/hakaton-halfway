@@ -16,17 +16,19 @@ var fbPlaces = function(args) {
 							.replace('%distance', opts.distance)
 							.replace('%token', opts.token);
 			$.getJSON(url, function(points){
+			  var pois = [];
 			  console.log(points);
 			  console.log(window.map);
 				$.each(points.data, function(i, point) {
 				  console.log(point);
-    		                new google.maps.Marker({
+    		                pois.push( new google.maps.Marker({
     		                    position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
     		                    map: window.map,
     		                    title: point.name
-    		                });
+    		                }));
 
     		        });
+    		        console.log(pois);
 			});
 		}
 	}
