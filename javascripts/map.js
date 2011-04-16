@@ -39,8 +39,8 @@ hw_map = (function() {
                     clickable: true,
                     position: latlng,
                 }),
-                latitude: pos.lat(),
-                longitude: pos.lng(),
+                latitude: latlng.lat(),
+                longitude: latlng.lng(),
             }
             self.friends.push(friend)
             hw.updateStatusbar();
@@ -68,8 +68,8 @@ hw_map = (function() {
             }
             self.myMarker.setPosition(self.myPos);
             self.map.setCenter(self.myPos);
-            google.maps.event.addListener(self.myMarker, 'dragend', function (evt) {
-                self.myPos = evt.latLng;
+            google.maps.event.addListener(self.myMarker, 'dragend', function (event) {
+                self.myPos = event.latLng;
             });
         },
 
@@ -115,6 +115,8 @@ hw_map = (function() {
         },
         
         geocodeFriend: function(address) {
+          if(address === '')
+            return;
           hw_map.geocoder.geocode({'address': address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                  // map.setCenter(results[0].geometry.location);
