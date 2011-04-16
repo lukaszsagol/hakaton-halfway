@@ -8,3 +8,4 @@ FB.init({
 FB.Event.subscribe('auth.login', function(response) {
   console.debug(response);
 });
+
