@@ -32,11 +32,9 @@ hw = (function() {
     $('#friend_address').keypress(function(e) {
       if (e.which==13) {
         e.preventDefault();
-        if($(this).val() == ''){
-          if(confirm('Just add new point?'))
-            hw_map.geocodeFriend(hw_map.map.getCenter());
-          return;
-        }
+        if($(this).val() === ''){
+          if(!confirm('Just add new point?'))
+            return;
 
         hw_map.geocodeFriend($(this).val());
         $(this).val('');

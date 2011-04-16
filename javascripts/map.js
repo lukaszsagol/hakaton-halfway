@@ -39,8 +39,8 @@ hw_map = (function() {
                     clickable: true,
                     position: latlng,
                 }),
-                latitude: latlng.getLat(),
-                longitude: latlng.getLng(),
+                latitude: latlng.lat(),
+                longitude: latlng.lng(),
             }
             self.friends.push(friend)
             hw.updateStatusbar();
@@ -115,6 +115,8 @@ hw_map = (function() {
         },
         
         geocodeFriend: function(address) {
+          if(address === '')
+            return;
           hw_map.geocoder.geocode({'address': address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                  // map.setCenter(results[0].geometry.location);
