@@ -1,4 +1,4 @@
-hf = (function(){
+hw = (function() {
 	var self = {
         showError: function(msg) {
             // TODO Jakis boxik
@@ -10,7 +10,7 @@ hf = (function(){
         },
 
         setOwnLocation: function(latitude, longitude, accuracy) {
-            //
+            hw_map.updateMyMarker(latitude, longitude, accuracy);
         },
 
         updateLocation: function() {
@@ -34,3 +34,7 @@ hf = (function(){
 	};
 	return self;
 })();
+
+$(function() {
+    $('#refresh_location').click(hw.updateLocation);
+});
