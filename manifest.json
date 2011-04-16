@@ -1,0 +1,24 @@
+{
+  "name": "Halfway",
+  "description": "Meet with your friends...",
+  "version": "1",
+  "app": {
+    "urls": [
+      "*://*.facebook.com",
+      "*://*.facebook.net",
+      "*://halfway.schranz.io",
+      "*://*.google.com",
+      "*://*.googleapis.com",
+      "*://*.google-analytics.com/"
+    ],
+    "launch": {
+      "web_url": "http://halfway.schranz.io/"
+    }
+  },
+  "icons": {
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "geolocation"
+  ]
+}
