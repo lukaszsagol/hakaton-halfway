@@ -66,7 +66,7 @@ hw_map = (function() {
             self.myMarker.setPosition(self.myPos);
             self.map.setCenter(self.myPos);
             google.maps.event.addListener(self.myMarker, 'dragend', function (evt) {
-                self.myPos = event.latLng;
+                self.myPos = evt.latLng;
             });
         },
 
