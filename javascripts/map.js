@@ -64,6 +64,7 @@ hw_map = (function() {
 
         setMyPosition: function(latitude, longitude) {
             self.myPos = new google.maps.LatLng(latitude, longitude);
+            hw_map.bounds.extend(self.myPos);
         },
 
         updateMyMarker: function() {
