@@ -1,11 +1,15 @@
 body {
 	font-family: 'Lato', serif;
 	margin: 0;
+  border-top: 5px solid #000;
+  background: #eee;
 }
 
 header {
-	width: 750px;
+	width: 940px;
+  padding: 0 10px;
 	margin: 0 auto;
+  background: #fff;
 }
 
 h1 { 
@@ -52,8 +56,9 @@ footer {
 }
 
 #main {
-  width: 750px;
+  width: 960px;
   margin: 0 auto;
+  background: #fff;
 }
 
 #categories ul {

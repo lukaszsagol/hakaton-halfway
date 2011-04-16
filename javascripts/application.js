@@ -50,7 +50,7 @@ hw = (function() {
   },
 
   updateStatusbar: function() {
-    $('#statusbar').html("You will meet with "+hw_map.friends.length+" friends. <a href='#'>Display our meeting point!</a>");
+    $('#statusbar').html("You will meet with "+hw_map.friends.length+" friends. <a href='#' class='update_meetingpoint'>Display our meeting point!</a>");
   },
 
   showError: function(msg) {
