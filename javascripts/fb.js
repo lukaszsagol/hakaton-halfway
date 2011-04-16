@@ -29,8 +29,6 @@ var fbPlaces = function(args) {
           marker = hw_map.pois[hw_map.pois.length-1];
           hw_map.bindInfoWindow(marker, marker.title);
         });
-        
-                   
 			});
 		}
 	}

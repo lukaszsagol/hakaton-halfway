@@ -37,13 +37,18 @@ hw_map = (function() {
                     map: self.map,
                     draggable: draggable,
                     icon: 'images/friends.png',
-                    shadow: 'images/shadow.png',
+                    flat: true,
                     clickable: true,
                     position: latlng,
                 }),
                 latitude: latlng.lat(),
                 longitude: latlng.lng(),
             }
+            google.maps.event.addListener(friend.marker, 'dragend', function (event) {
+                friend.latitude = event.latLng.lat(),
+                friend.longitude = event.latLng.lng(),
+                self.myPos = event.latLng;
+            });
             self.friends.push(friend)
             hw_map.bounds.extend(latlng);
             hw.updateStatusbar();
@@ -66,7 +71,7 @@ hw_map = (function() {
                 self.myMarker = new google.maps.Marker({
                     map: self.map,
                     icon: 'images/me.png',
-                    shadow: 'images/shadow.png',
+                    flat: true,
                     draggable: true,
                     clickable: false,
                 });
@@ -96,7 +101,7 @@ hw_map = (function() {
                 self.meetingMarker = new google.maps.Marker({
                     map: self.map,
                     icon: 'images/regroup.png',
-                    shadow: 'images/shadow.png',
+                    flat: true,
                     draggable: false,
                     clickable: false,
                 });
@@ -142,5 +147,4 @@ hw_map = (function() {
 $(function() {
     hw_map.createMap();
     $('#add_friend').click(hw_map.addFriend);
-    $('#update_meetingpoint').click(hw_map.updateMeetingPoint);
 });
