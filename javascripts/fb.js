@@ -11,13 +11,19 @@ var fbPlaces = function(args) {
 	var placesUrl = 'https://graph.facebook.com/search?q=%query&type=place&center=%lat,%lon&distance=%distance&access_token=%token&callback=?';
   
 	return {
-		search: function(query) {
+		search: function(query, icon) {
+		  if(typeof icon === 'undefined')
+		    icon = false;
 		  position = hw_map.meetingPos;
 			url = placesUrl.replace('%query', query)
 							.replace('%lat', position.lat())
 							.replace('%lon', position.lng())
 							.replace('%distance', opts.distance)
 							.replace('%token', opts.token);
+			if(icon)
+			  icon_img = query;
+			else
+			  icon_img = 'blank';
 			$.getJSON(url, function(points){
 			  hw_map.removePois();
 			  $.each(points.data, function(i, point) {
@@ -25,7 +31,7 @@ var fbPlaces = function(args) {
             position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
             map: hw_map.map,
             title: point.name,
-            icon: 'images/'+query+'.png',
+            icon: 'images/'+icon_img+'.png',
           }));
           marker = hw_map.pois[hw_map.pois.length-1];
           hw_map.bindInfoWindow(marker, marker.title);

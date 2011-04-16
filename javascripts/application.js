@@ -43,7 +43,7 @@ hw = (function() {
 
     $('#categories li.link a').click(function() {
       $('#categories li a').removeClass('active');
-      hw.places.search(this.innerText);
+      hw.places.search(this.innerText, true);
       $(this).addClass('active');
     });
   },
