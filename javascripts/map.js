@@ -59,12 +59,11 @@ hw_map = (function() {
         },
         
         removePois: function() {
-          while(hw_map.pois.length > 0)
-          {
-        		poi = hw_map.pois.pop()
-            poi.setMap();
-            delete poi;
-          }
+            while(hw_map.pois.length > 0) {
+                poi = hw_map.pois.pop()
+                poi.setMap();
+                delete poi;
+            }
         },
         
         bindInfoWindow: function (marker, html) {
@@ -73,12 +72,11 @@ hw_map = (function() {
                 hw_map.infoWindow.open(hw_map.map, marker);
             });
         }
-    };
+    },
     return self;
 })();
 
 $(function() {
     hw_map.createMap();
     $('#add_friend').click(hw_map.addFriend);
-    
 });

@@ -19,12 +19,23 @@ hw = (function() {
     });
     self.updateLocation();
   },
+
   bindActions: function() {
-    $('#search_form').submit(function(e) {
-      e.preventDefault();
-      hw.places.search($('#search_query').val());
+    $('#search_query').keypress(function(e) {
+      if (e.which==13) {
+        $('#categories li a').removeClass('active');
+        e.preventDefault();
+        hw.places.search($(this).val());
+      }
+    });
+
+    $('#categories li.link a').click(function() {
+      $('#categories li a').removeClass('active');
+      hw.places.search(this.innerText);
+      $(this).addClass('active');
     });
   },
+
   showError: function(msg) {
       // TODO Jakis boxik
       alert(msg);
