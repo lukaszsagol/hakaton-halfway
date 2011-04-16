@@ -21,7 +21,7 @@ hw = (function() {
   bindActions: function() {
     $('#search_form').submit(function(e) {
       e.preventDefault();
-      hw.places.search(52,21,$('search_query').val());
+      hw.places.search(52.219505,21.01243599999998,$('#search_query').val());
     });
     $('#refresh_location').click(hw.updateLocation);
   },

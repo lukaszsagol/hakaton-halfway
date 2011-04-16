@@ -9,17 +9,14 @@ var fbPlaces = function(args) {
   
 	return {
 		search: function(lat, lon, query) {
-		  console.log('asdf');
 			url = placesUrl.replace('%query', query)
 							.replace('%lat', lat)
 							.replace('%lon', lon)
 							.replace('%distance', opts.distance)
 							.replace('%token', opts.token);
 			$.getJSON(url, function(points){
-			  console.log(points);
 			  var pois = [];
 			  pois.empty;
-			  console.log(hw_map.map);
 			  $.each(points.data, function(i, point) {
           pois.push( new google.maps.Marker({
             position: new google.maps.LatLng(point.location.latitude, point.location.longitude),
