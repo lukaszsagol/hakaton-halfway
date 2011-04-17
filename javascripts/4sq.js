@@ -48,6 +48,7 @@ hw.providers.foursquare = function(args) {
     },
     
     search: function(query, icon) {
+      hw_map.removePois();
       $.getJSON('https://api.foursquare.com/v2/venues/search?ll='+hw_map.meetingPos.lat()+','+hw_map.meetingPos.lng()+'&query='+query+'&oauth_token='+accessToken+'&callback=?', function(data) {
         $.each(data.response.groups[1].items, function(i, place) {
           hw_map.pois.push( new google.maps.Marker({

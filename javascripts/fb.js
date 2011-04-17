@@ -1,7 +1,14 @@
 hw.providers.facebook = function(args) {
   var self = {
     
+    defaults: { distance: 1000, },
+    opts: {},
+    placesUrl: 'https://graph.facebook.com/search?q=%query&type=place&center=%lat,%lon&distance=%distance&access_token=%token&callback=?',
+    
     auth: function(){
+      
+      self.opts = $.extend({}, self.defaults);
+      
       FB.init({
         appId  : 165971536792687,
         status : true,
@@ -11,28 +18,19 @@ hw.providers.facebook = function(args) {
 
       FB.getLoginStatus(function(response) {
         if (response.session) {
-          $('#overlay').hide();
-          hw.places = new fbPlaces({token: response.session.access_token});
-        } else {
-          $('#overlay').show();
+          self.opts.token = response.session.access_token;
         }
       });
 
       FB.Event.subscribe('auth.sessionChange', function(response) {
         if (response.session) {
-          $('#overlay').hide();
-          hw.places = new fbPlaces({token: response.session.access_token});
-        } else {
-          $('#overlay').show();
+          self.opts.token = response.session.access_token;
         }
       });
 
       FB.Event.subscribe('auth.login', function(response) {
         if (response.session) {
-          $('#overlay').hide();
-          hw.places = new fbPlaces({token: response.session.access_token});
-        } else {
-          $('#overlay').show();
+          self.opts.token = response.session.access_token;
         }
       });
     },
@@ -40,29 +38,13 @@ hw.providers.facebook = function(args) {
     fetchFriends: function(){
       // to be implemented
     }, 
-  }
-  
-  return self;
-}
-
-var fbPlaces = function(args) {
-
-  var defaults = {
-    distance: 1000,
-  }
-  var opts = $.extend({}, defaults, args);
-  var infowindow = new google.maps.InfoWindow({
-    content: ''
-  });
-
-  var placesUrl = 'https://graph.facebook.com/search?q=%query&type=place&center=%lat,%lon&distance=%distance&access_token=%token&callback=?';
-
-  return {
+    
     search: function(query, icon) {
+      hw_map.removePois();
       if(typeof icon === 'undefined')
         icon = false;
       position = hw_map.meetingPos;
-      url = placesUrl.replace('%query', query).replace('%lat', position.lat()).replace('%lon', position.lng()).replace('%distance', opts.distance).replace('%token', opts.token);
+      url = self.placesUrl.replace('%query', query).replace('%lat', position.lat()).replace('%lon', position.lng()).replace('%distance', self.opts.distance).replace('%token', self.opts.token);
       if(icon)
         icon_img = query;
       else
@@ -81,7 +63,8 @@ var fbPlaces = function(args) {
           hw_map.bindInfoWindow(marker, marker.title);
         });
       });
-    }
+    },
   }
+  
+  return self;
 }
-
