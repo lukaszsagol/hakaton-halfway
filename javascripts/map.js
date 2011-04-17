@@ -107,6 +107,7 @@ hw_map = (function() {
             latitude /= count;
             longitude /= count;
             meetPoint = new google.maps.LatLng(latitude, longitude);
+            console.log(meetPoint);
             hw_map.geocoder.geocode({'latLng': meetPoint}, function(results, status) {
               if (status == google.maps.GeocoderStatus.OK) {
                   meetPoint = results[0].geometry.location;
