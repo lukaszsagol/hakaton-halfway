@@ -1,3 +1,50 @@
+hw.providers.facebook = function(args) {
+  var self = {
+    
+    auth: function(){
+      FB.init({
+        appId  : 165971536792687,
+        status : true,
+        cookie : true,
+        xfbml  : true
+      });
+
+      FB.getLoginStatus(function(response) {
+        if (response.session) {
+          $('#overlay').hide();
+          hw.places = new fbPlaces({token: response.session.access_token});
+        } else {
+          $('#overlay').show();
+        }
+      });
+
+      FB.Event.subscribe('auth.sessionChange', function(response) {
+        if (response.session) {
+          $('#overlay').hide();
+          hw.places = new fbPlaces({token: response.session.access_token});
+        } else {
+          $('#overlay').show();
+        }
+      });
+
+      FB.Event.subscribe('auth.login', function(response) {
+        if (response.session) {
+          $('#overlay').hide();
+          hw.places = new fbPlaces({token: response.session.access_token});
+        } else {
+          $('#overlay').show();
+        }
+      });
+    },
+    
+    fetchFriends: function(){
+      // to be implemented
+    }, 
+  }
+  
+  return self;
+}
+
 var fbPlaces = function(args) {
 
   var defaults = {

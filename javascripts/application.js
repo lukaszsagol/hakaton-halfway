@@ -1,42 +1,16 @@
 hw = (function() {
 	var self = {
     places: null,
+    providers: {},
 	      
 	  init: function() {
-	    FB.init({
-        appId  : 165971536792687,
-        status : true,
-        cookie : true,
-        xfbml  : true
-      });
-
-      FB.getLoginStatus(function(response) {
-        if (response.session) {
-      		$('#overlay').hide();
-          hw.places = new fbPlaces({token: response.session.access_token});
-        } else {
-      		$('#overlay').show();
-        }
-      });
-
-      FB.Event.subscribe('auth.sessionChange', function(response) {
-        if (response.session) {
-      		$('#overlay').hide();
-          hw.places = new fbPlaces({token: response.session.access_token});
-        } else {
-      		$('#overlay').show();
-        }
-      });
-
-      FB.Event.subscribe('auth.login', function(response) {
-        if (response.session) {
-      		$('#overlay').hide();
-          hw.places = new fbPlaces({token: response.session.access_token});
-        } else {
-      		$('#overlay').show();
-        }
-      });
-    
+	    
+	    regexp = new RegExp(/app=([^&]+)/gi);
+      app = regexp.exec(window.location.hash)[1];
+      hw.dataProvider = self.providers[app]({});
+      hw.dataProvider.auth();
+      hw.dataProvider.fetchFriends();
+      
       self.updateLocation();
     },
 
