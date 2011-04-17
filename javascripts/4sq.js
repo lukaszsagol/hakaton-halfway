@@ -2,7 +2,7 @@ hw.providers.foursquare = function(args) {
 
   var defaults = {
     clientId: 'UDAVXWZTHSGXF4WETBZ0PQZDS3PDEQZB1SPSFUQO3ZTHSNUN',
-    callbackUrl: 'http%3A%2F%2Fhalfway.schranz.io%2F%23!%2Fapp%3D4sq',
+    callbackUrl: 'http%3A%2F%2Fhalfway.schranz.io%2F%23!%2Fapp%3Dfoursquare',
     distance: 1000,
   };
   
