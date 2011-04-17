@@ -33,7 +33,7 @@ hw = (function() {
         if (e.which==13) {
           $('#categories li a').removeClass('active');
           e.preventDefault();
-          hw.places.search($(this).val());
+          hw.dataProvider.search($(this).val());
         }
       });
     

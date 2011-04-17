@@ -46,6 +46,22 @@ hw.providers.foursquare = function(args) {
         });
       });
     },
+    
+    search: function(query, icon) {
+      $.getJSON('https://api.foursquare.com/v2/venues/search?ll='+hw_map.meetingPos.lat()+','+hw_map.meetingPos.lng()+'&query='+query+'&oauth_token='+accessToken+'&callback=?', function(data) {
+        $.each(data.response.groups[1].items, function(i, place) {
+          hw_map.pois.push( new google.maps.Marker({
+            position: new google.maps.LatLng(place.location.lat, place.location.lng),
+            map: hw_map.map,
+            title: place.name+' [~'+place.location.distance+'m]',
+//            icon: image,
+          }));
+
+          marker = hw_map.pois[hw_map.pois.length-1];
+          hw_map.bindInfoWindow(marker, marker.title);
+        });
+      });
+    },
   }
   
   return self;
