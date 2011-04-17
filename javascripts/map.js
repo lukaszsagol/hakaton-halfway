@@ -111,7 +111,7 @@ hw_map = (function() {
               if (status == google.maps.GeocoderStatus.OK) {
                   meetPoint = results[0].geometry.location;
                   meetPointInfo = results[0].formatted_address;
-                  console.log(result);
+                  console.log(results);
                //   infowindow.open(map, marker);
               } else {
                 
