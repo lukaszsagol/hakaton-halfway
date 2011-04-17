@@ -6,7 +6,7 @@ hw = (function() {
 	  init: function() {
 	    
 	    regexp = new RegExp(/app=([^&]+)/gi);
-      app = regexp.exec(window.location.hash)[1];
+      app = regexp.exec(window.location.hash);
       
       if(app === null)
       {
@@ -14,7 +14,7 @@ hw = (function() {
       }
       else
       {
-        hw.dataProvider = self.providers[app]({});
+        hw.dataProvider = self.providers[app[1]]({});
         hw.dataProvider.auth();
         hw.dataProvider.fetchFriends();
 
