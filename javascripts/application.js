@@ -21,6 +21,12 @@ hw = (function() {
         self.updateLocation();
       }
     },
+    
+    updateProvider: function(provider) {
+      $('#overlay').hide();
+      window.location.replace('http://halfway.schranz.io/#!/app='+provider);
+      self.init();
+    },
 
     bindActions: function() {
       $('#search_query').keypress(function(e) {
