@@ -7,11 +7,19 @@ hw = (function() {
 	    
 	    regexp = new RegExp(/app=([^&]+)/gi);
       app = regexp.exec(window.location.hash)[1];
-      hw.dataProvider = self.providers[app]({});
-      hw.dataProvider.auth();
-      hw.dataProvider.fetchFriends();
       
-      self.updateLocation();
+      if(app === null)
+      {
+        $('#overlay').show();
+      }
+      else
+      {
+        hw.dataProvider = self.providers[app]({});
+        hw.dataProvider.auth();
+        hw.dataProvider.fetchFriends();
+
+        self.updateLocation();
+      }
     },
 
     bindActions: function() {
