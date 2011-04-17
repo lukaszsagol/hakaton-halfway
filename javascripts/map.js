@@ -109,11 +109,10 @@ hw_map = (function() {
             meetPoint = new google.maps.LatLng(latitude, longitude);
             hw_map.geocoder.geocode({'latLng': meetPoint}, function(results, status) {
               if (status == google.maps.GeocoderStatus.OK) {
-                if (results[1]) {
-                  meetPoint = results[1].geometry.location;
-                  meetPointInfo = results[1].formatted_address;
+                  meetPoint = results[0].geometry.location;
+                  meetPointInfo = results[0].formatted_address;
+                  console.log(result);
                //   infowindow.open(map, marker);
-                }
               } else {
                 
               }
