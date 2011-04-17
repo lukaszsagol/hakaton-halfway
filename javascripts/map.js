@@ -3,6 +3,7 @@ hw_map = (function() {
         myPos: null,
         myMarker: null,
         meetingPos: null,
+        meetingPosInfo: null,
         meetingMarker: null,
         map: null,
         accuracyColor: '#ff9000',
@@ -106,19 +107,15 @@ hw_map = (function() {
             }
             latitude /= count;
             longitude /= count;
-            meetPoint = new google.maps.LatLng(latitude, longitude);
-            console.log(meetPoint);
-            hw_map.geocoder.geocode({'latLng': meetPoint}, function(results, status) {
+            self.meetingPos = new google.maps.LatLng(latitude, longitude);
+            hw_map.geocoder.geocode({'latLng': self.meetingPos}, function(results, status) {
               if (status == google.maps.GeocoderStatus.OK) {
-                  meetPoint = results[0].geometry.location;
-                  meetPointInfo = results[0].formatted_address;
-                  console.log(results);
-               //   infowindow.open(map, marker);
+                  self.meetingPos = results[0].geometry.location;
+                  self.meetingPosInfo = results[0].formatted_address;
               } else {
                 
               }
             });
-            self.meetingPos = meetPoint;
             if (!self.meetingMarker) {
                 self.meetingMarker = new google.maps.Marker({
                     map: self.map,
@@ -131,6 +128,8 @@ hw_map = (function() {
             }
             self.meetingMarker.setPosition(self.meetingPos);
             self.map.setCenter(self.meetingPos);
+            self.infoWindow.setContent(self.meetingPosInfo);
+            self.infoWindow.open(self.map, self.meetingMarker);
         },
         
         removePois: function() {
