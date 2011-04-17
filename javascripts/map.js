@@ -106,7 +106,19 @@ hw_map = (function() {
             }
             latitude /= count;
             longitude /= count;
-            self.meetingPos = new google.maps.LatLng(latitude, longitude);
+            meetPoint = new google.maps.LatLng(latitude, longitude);
+            geocoder.geocode({'latLng': meetPoint}, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                if (results[1]) {
+                  console.log(results[1]);
+                  infowindow.setContent(results[1].formatted_address);
+                  infowindow.open(map, marker);
+                }
+              } else {
+                
+              }
+            });
+            self.meetingPos = meetPoint;
             if (!self.meetingMarker) {
                 self.meetingMarker = new google.maps.Marker({
                     map: self.map,
