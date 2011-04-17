@@ -22,6 +22,14 @@ hw_map = (function() {
             });
             self.infoWindow = new google.maps.InfoWindow;
             self.geocoder = new google.maps.Geocoder();
+            self.meetingMarker = new google.maps.Marker({
+              map: self.map,
+              icon: 'images/regroup.png',
+              flat: true,
+              draggable: false,
+              clickable: true,
+              zIndex: 10000,
+            });
         },
 
         addFriend: function(latlng, draggable) {
@@ -108,28 +116,17 @@ hw_map = (function() {
             latitude /= count;
             longitude /= count;
             self.meetingPos = new google.maps.LatLng(latitude, longitude);
+            self.meetingPosInfo = self.meetingPos.toString();
             hw_map.geocoder.geocode({'latLng': self.meetingPos}, function(results, status) {
               if (status == google.maps.GeocoderStatus.OK) {
                   self.meetingPos = results[0].geometry.location;
                   self.meetingPosInfo = results[0].formatted_address;
-              } else {
-                
               }
+              self.meetingMarker.setPosition(self.meetingPos);
+              self.map.setCenter(self.meetingPos);
+              self.infoWindow.setContent(self.meetingPosInfo);
+              self.infoWindow.open(self.map, self.meetingMarker);
             });
-            if (!self.meetingMarker) {
-                self.meetingMarker = new google.maps.Marker({
-                    map: self.map,
-                    icon: 'images/regroup.png',
-                    flat: true,
-                    draggable: false,
-                    clickable: false,
-                    zIndex: 1000,
-                });
-            }
-            self.meetingMarker.setPosition(self.meetingPos);
-            self.map.setCenter(self.meetingPos);
-            self.infoWindow.setContent(self.meetingPosInfo);
-            self.infoWindow.open(self.map, self.meetingMarker);
         },
         
         removePois: function() {
