@@ -49,6 +49,13 @@ footer {
 	text-align: center;
 }
 
+#broken-bar {
+  font-size: 16px;
+  background: #e0e0e0;
+  text-align: center;
+  padding: 3px 0px 5px;
+}
+
 #overlay .center {
 	margin: 200px auto;
 	width: 600px;
