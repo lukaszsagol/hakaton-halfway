@@ -54,7 +54,6 @@ hw_map = (function() {
         var latlng = self.map.getCenter()
 
       var friend = {
-        name: 'What was his name again?',
         marker: new google.maps.Marker({
           map: self.map,
           draggable: draggable,
