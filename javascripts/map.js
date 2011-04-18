@@ -116,6 +116,8 @@ hw_map = (function() {
     },
 
     sphericalToCartesian: function(latitude, longitude) {
+      latitude = (latitude / 180) * Math.PI;
+      longitude = (longitude / 360) * Math.PI;
       return {
         x: Math.cos(latitude) * Math.cos(longitude),
         y: Math.cos(latitude) * Math.sin(longitude),
@@ -140,8 +142,8 @@ hw_map = (function() {
       current.y /= count;
       current.z /= count;
 
-      var latitude = Math.atan2(current.z, Math.sqrt(current.x * current.x + current.y * current.y));
-      var longitude = Math.atan2(current.y, current.x);
+      var latitude = (Math.atan2(current.z, Math.sqrt(current.x * current.x + current.y * current.y)) / Math.PI) * 180;
+      var longitude = (Math.atan2(current.y, current.x) / Math.PI) * 360;
 
       self.meetingPos = new google.maps.LatLng(latitude, longitude);
       self.meetingPosInfo = self.meetingPos.toString();
