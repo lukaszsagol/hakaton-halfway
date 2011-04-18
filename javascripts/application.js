@@ -1,11 +1,10 @@
 hw = (function() {
-	var self = {
+  var self = {
     places: null,
     providers: {},
 	      
-	  init: function() {
-	    
-	    regexp = new RegExp(/app=([^&]+)/gi);
+    init: function() {
+      regexp = new RegExp(/app=([^&]+)/gi);
       app = regexp.exec(window.location.hash);
       
       if(app === null)
@@ -71,11 +70,6 @@ hw = (function() {
         alert(msg);
     },
 
-    setOwnLocation: function(latitude, longitude, accuracy) {
-      hw_map.setMyPosition(latitude, longitude);
-      hw_map.updateMyMarker();
-    },
-
     updateLocation: function() {
       if (!navigator.geolocation) {
         self.showError('Geolocalisation not suppoorted!');
@@ -83,7 +77,7 @@ hw = (function() {
       }
       navigator.geolocation.getCurrentPosition(
         function(pos) {
-          self.setOwnLocation(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
+          hw_map.setMyPosition(pos.coords.latitude, pos.coords.longitude);
         },
         function(error) {
           var code = error.code
@@ -94,11 +88,11 @@ hw = (function() {
         }
       );
     },
-	};
-	return self;
+  };
+  return self;
 })();
 
 jQuery(function($) {
-	hw.init();
-	hw.bindActions();
+  hw.init();
+  hw.bindActions();
 });

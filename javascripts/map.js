@@ -14,7 +14,7 @@ hw_map = (function() {
     minZoom: 17,
 
     createMap: function() {
-      self.myPos = new google.maps.LatLng(52.219505, 21.012436),
+      self.setMyPosition(52.219505, 21.012436);
       self.map = new google.maps.Map($('#map_canvas')[0], {
         zoom: self.minZoom,
         center: self.myPos,
@@ -83,6 +83,7 @@ hw_map = (function() {
 
     setMyPosition: function(latitude, longitude) {
       self.myPos = new google.maps.LatLng(latitude, longitude);
+      hw_map.updateMyMarker();
     },
 
     updateMyMarker: function() {
