@@ -140,7 +140,7 @@ hw_map = (function() {
       current.y /= count;
       current.z /= count;
 
-      var latitude = Math.atan2(current.z, Math.sqrt(current.x * current.x + current.y * current.y);
+      var latitude = Math.atan2(current.z, Math.sqrt(current.x * current.x + current.y * current.y));
       var longitude = Math.atan2(current.y, current.x);
 
       self.meetingPos = new google.maps.LatLng(latitude, longitude);
