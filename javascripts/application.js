@@ -21,7 +21,7 @@ hw = (function() {
     
     updateProvider: function(provider) {
       $('#overlay').hide();
-      window.location.replace('http://halfway.schranz.io/#!/app='+provider);
+      window.location.hash = '#!/app=' + provider;
       self.init();
     },
 
@@ -36,13 +36,14 @@ hw = (function() {
     
       $('#friend_address').keypress(function(e) {
         if (e.which==13) {
+          var $this = $(this);
           e.preventDefault();
-          if($(this).val() === '')
+          if($this.val() === '')
             if(!confirm('Just add new point?'))
               return;
 
-          hw_map.geocodeFriend($(this).val());
-          $(this).val('');
+          hw_map.geocodeFriend($this.val());
+          $this.val('');
         }
       });
 
