@@ -115,19 +115,34 @@ hw_map = (function() {
       });
     },
 
+    sphericalToCartesian: function(latitude, longitude) {
+      return {
+        x: Math.cos(latitude) * Math.cos(longitude),
+        y: Math.cos(latitude) * Math.sin(longitude),
+        z: Math.sin(latitude),
+      };
+    },
+
     updateMeetingPoint: function() {
-      // We're on a flat disc!!! Who said we live on a sphere!?!?!?
-      var latitude = self.myPos.lat();
-      var longitude = self.myPos.lng();
+      var current = self.sphericalToCartesian(self.myPos.lat(), self.myPos.lng());
       var count = 1;
+
       for (var friend in self.friends) {
         friend = self.friends[friend];
-        latitude += friend.latitude;
-        longitude += friend.longitude;
+        var f = self.sphericalToCartesian(friend.latitude, friend.longitude);
+        current.x += f.x;
+        current.y += f.y;
+        current.z += f.z;
         count++;
       }
-      latitude /= count;
-      longitude /= count;
+      
+      current.x /= count;
+      current.y /= count;
+      current.z /= count;
+
+      var latitude = Math.atan2(current.z, Math.sqrt(current.x * current.x + current.y * current.y);
+      var longitude = Math.atan2(current.y, current.x);
+
       self.meetingPos = new google.maps.LatLng(latitude, longitude);
       self.meetingPosInfo = self.meetingPos.toString();
       self.geocoder.geocode({'latLng': self.meetingPos}, function(results, status) {
