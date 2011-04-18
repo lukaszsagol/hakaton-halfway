@@ -30,7 +30,7 @@ hw_map = (function() {
         clickable: true,
         zIndex: 10000,
       });
-
+      self.updateMyMarker();
       self.updateLocation();
     },
 
@@ -97,7 +97,6 @@ hw_map = (function() {
 
     setMyPosition: function(latitude, longitude) {
       self.myPos = new google.maps.LatLng(latitude, longitude);
-      self.updateMyMarker();
     },
 
     updateMyMarker: function() {
@@ -179,6 +178,7 @@ hw_map = (function() {
       navigator.geolocation.getCurrentPosition(
         function(pos) {
           self.setMyPosition(pos.coords.latitude, pos.coords.longitude);
+          self.updateMyMarker();
         },
         function(error) {
           var code = error.code
