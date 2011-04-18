@@ -13,7 +13,7 @@ hw_map = (function() {
     geocoder: null,
     minZoom: 17,
 
-    createMap: function() {
+    init: function() {
       self.setMyPosition(52.219505, 21.012436);
       self.map = new google.maps.Map($('#map_canvas')[0], {
         zoom: self.minZoom,
@@ -29,6 +29,20 @@ hw_map = (function() {
         draggable: false,
         clickable: true,
         zIndex: 10000,
+      });
+
+      self.updateLocation();
+    },
+
+    bindActions: function() {
+      $('#add_friend').click(function() { 
+        var adr = $('#friend_address').val(); 
+        if (adr === '') {
+          self.addFriend(); 
+        } else {
+          self.geocodeFriend(adr);
+        }
+        $('#friend_address').val('');
       });
     },
 
@@ -83,7 +97,7 @@ hw_map = (function() {
 
     setMyPosition: function(latitude, longitude) {
       self.myPos = new google.maps.LatLng(latitude, longitude);
-      hw_map.updateMyMarker();
+      self.updateMyMarker();
     },
 
     updateMyMarker: function() {
@@ -118,7 +132,7 @@ hw_map = (function() {
       longitude /= count;
       self.meetingPos = new google.maps.LatLng(latitude, longitude);
       self.meetingPosInfo = self.meetingPos.toString();
-      hw_map.geocoder.geocode({'latLng': self.meetingPos}, function(results, status) {
+      self.geocoder.geocode({'latLng': self.meetingPos}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           self.meetingPos = results[0].geometry.location;
           self.meetingPosInfo = results[0].formatted_address;
@@ -141,7 +155,7 @@ hw_map = (function() {
     bindInfoWindow: function (marker, html) {
       google.maps.event.addListener(marker, 'click', function() {
         self.infoWindow.setContent(html);
-        self.infoWindow.open(hw_map.map, marker);
+        self.infoWindow.open(self.map, marker);
       });
     },
 
@@ -155,20 +169,33 @@ hw_map = (function() {
           alert("Couldn't find that address. Please try  again!");
         }
       });
-    }
+    },
+
+    updateLocation: function() {
+      if (!navigator.geolocation) {
+        hw.showError('Geolocalisation not suppoorted!');
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(
+        function(pos) {
+          self.setMyPosition(pos.coords.latitude, pos.coords.longitude);
+        },
+        function(error) {
+          var code = error.code
+          if (code == 1) {
+            console.log('Geolocalisation cancelled');
+            return; // ignoruj
+          }
+          hw.showError('Could not find your location.');
+        }
+      );
+    },
+
   };
   return self;
 })();
 
 $(function() {
-  hw_map.createMap();
-  $('#add_friend').click(function() { 
-    var adr = $('#friend_address').val(); 
-    if (adr === '') {
-      hw_map.addFriend(); 
-    } else {
-      hw_map.geocodeFriend(adr);
-    }
-    $('#friend_address').val('');
-  });
+  hw_map.init();
+  hw_map.bindActions();
 });

@@ -13,11 +13,9 @@ hw = (function() {
       }
       else
       {
-        hw.dataProvider = self.providers[app[1]]({});
-        hw.dataProvider.auth();
-        hw.dataProvider.fetchFriends();
-
-        self.updateLocation();
+        self.dataProvider = self.providers[app[1]]({});
+        self.dataProvider.auth();
+        self.dataProvider.fetchFriends();
       }
     },
     
@@ -32,7 +30,7 @@ hw = (function() {
         if (e.which==13) {
           $('#categories li a').removeClass('active');
           e.preventDefault();
-          hw.dataProvider.search($(this).val());
+          self.dataProvider.search($(this).val());
         }
       });
     
@@ -50,7 +48,7 @@ hw = (function() {
 
       $('#categories li.link a').click(function() {
         $('#categories li a').removeClass('active');
-        hw.dataProvider.search(this.innerText, true);
+        self.dataProvider.search(this.innerText, true);
         $(this).addClass('active');
       });
     },
@@ -68,25 +66,6 @@ hw = (function() {
 
     showError: function(msg) {
         alert(msg);
-    },
-
-    updateLocation: function() {
-      if (!navigator.geolocation) {
-        self.showError('Geolocalisation not suppoorted!');
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(
-        function(pos) {
-          hw_map.setMyPosition(pos.coords.latitude, pos.coords.longitude);
-        },
-        function(error) {
-          var code = error.code
-          if (code == 1) {
-            return; // ignoruj
-          }
-          self.showError('Could not find your location.');
-        }
-      );
     },
   };
   return self;
