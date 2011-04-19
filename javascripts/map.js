@@ -148,7 +148,7 @@ hw_map = (function() {
       var latitude = (Math.atan2(current.z, Math.sqrt(current.x * current.x + current.y * current.y)) / Math.PI) * 180;
       var longitude = (Math.atan2(current.y, current.x) / Math.PI) * 180;
       var uglyness = Math.abs(latitude) / 90;
-      var latitude = clat * uglyness + (1-clat) * latitude;
+      var latitude = clat * uglyness + latitude * (1-uglyness);
 
       self.meetingPos = new google.maps.LatLng(latitude, longitude);
       self.meetingPosInfo = self.meetingPos.toString();
