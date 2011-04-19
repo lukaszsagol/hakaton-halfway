@@ -127,8 +127,7 @@ hw_map = (function() {
 
     updateMeetingPoint: function() {
       var clat = self.myPos.lat();
-      var current = self.sphericalToCartesian(latitude, self.myPos.lng());
-      var l
+      var current = self.sphericalToCartesian(clat, self.myPos.lng());
       var count = 1;
 
       for (var friend in self.friends) {
