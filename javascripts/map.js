@@ -126,24 +126,30 @@ hw_map = (function() {
     },
 
     updateMeetingPoint: function() {
-      var current = self.sphericalToCartesian(self.myPos.lat(), self.myPos.lng());
+      var clat = self.myPos.lat();
+      var current = self.sphericalToCartesian(latitude, self.myPos.lng());
+      var l
       var count = 1;
 
       for (var friend in self.friends) {
         friend = self.friends[friend];
         var f = self.sphericalToCartesian(friend.latitude, friend.longitude);
+        clat += friend.latitude
         current.x += f.x;
         current.y += f.y;
         current.z += f.z;
         count++;
       }
       
+      clat /= count;
       current.x /= count;
       current.y /= count;
       current.z /= count;
 
       var latitude = (Math.atan2(current.z, Math.sqrt(current.x * current.x + current.y * current.y)) / Math.PI) * 180;
       var longitude = (Math.atan2(current.y, current.x) / Math.PI) * 180;
+      var uglyness = Math.abs(latitude) / 90;
+      var latitude = clat * uglyness + (1-clat) * latitude;
 
       self.meetingPos = new google.maps.LatLng(latitude, longitude);
       self.meetingPosInfo = self.meetingPos.toString();
